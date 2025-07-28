@@ -1,0 +1,41 @@
+---
+- name: Install apps
+  hosts: master
+  become: yes
+
+  tasks:
+    - name: install java,docker, maven and git
+      ansible.builtin.package:
+       name: "{{ item }}"
+       state: present
+       update_cache: yes
+      loop:
+       - openjdk-21-jdk
+       - maven
+       - git
+       - docker.io
+    - name: Add Jenkins repository key
+      apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins.io.key
+        state: present
+    - name: Add Jenkins repository
+      apt_repository:
+        repo: 'deb https://pkg.jenkins.io/debian binary/'
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      apt:
+        name: jenkins
+        state: present
+
+    - name: Ensure Jenkins is started and enabled
+      systemd:
+        name: jenkins
+        state: started
+        enabled: yes
+
+                                                                                                                                    41,0-1        Bot
