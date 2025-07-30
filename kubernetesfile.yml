@@ -30,7 +30,7 @@ metadata:
   spec:
     selector:
       app: finance-app
-      ports:
+    ports:
       - port: 8081
         targetport: 8081
         protocol: TCP
