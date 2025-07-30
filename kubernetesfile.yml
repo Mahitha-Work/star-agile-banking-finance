@@ -14,13 +14,13 @@ spec:
         app: finance-app
     spec:
       containers:
-      - name: finance-app
-        image: mahithareddy/banking-finance:1.0
-        ports: 
-        - containerport: 8081
-        env:
-        - name: port
-          vakue: "8081"
+        - name: finance-app
+          image: mahithareddy/banking-finance:1.0
+          ports: 
+          - containerPort: 8081
+          env:
+            - name: port
+              value: "8081"
 
 ---
 apiVersion: v1
@@ -32,7 +32,7 @@ metadata:
       app: finance-app
     ports:
       - port: 8081
-        targetport: 8081
+        targetPort: 8081
         protocol: TCP
     type: NodePort
     nodePort: 30081
